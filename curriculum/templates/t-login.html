@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+    <form action="/login/" method="post">
+        {% csrf_token %}
+        <p><input type="text" placeholder="username" name="uu" /></p>
+        <p><input type="password" placeholder="password" name="pp" /></p>
+        <p>自動退出登入時間:
+            <select name="ss">
+            <option value="1">5s</option>
+            <option value="2">20s</option>
+            <option value="3">1m</option>
+        </select></p>
+        <input type="submit" value="提交" />
+    </form>
+</body>
+
+</html>
