@@ -34,6 +34,10 @@
         .jumbotron {
             background-color: transparent;
         }
+        .temp{
+            height:100%
+                
+        }
     </style>
 </head>
 
@@ -212,40 +216,66 @@
             <hr/>
             <div class="container">
                 <div class="bg-light">
-                    <!-- table -->
-                    <table class="table table-bordered table-striped">
+                <div class="row">
+                    <div class="col-1">
+                        <table class="table table-bordered table-striped temp">
                         <thead>
-                            <tr>
-                                <th scope="col">一</th>
-                                <th scope="col">二</th>
-                                <th scope="col">三</th>
-                                <th scope="col">四</th>
-                                <th scope="col">五</th>
-                                <th scope="col">六</th>
-                                <th scope="col">日</th>
-                            </tr>
-                        </thead>
+                            <tr><th>節次</th></tr></thead>
                         <tbody>
-                        {% for k in courses_data%}
-                            <tr>
-                                {% for i in k %}
-                                    {%if edit%}
-                                    <td class="nav-link-col" id="{{i}}" data-toggle="modal" data-target="#choose-courses-modal" >
-                                        {{i}}
-                                    </td>
+                            <tr><th>01</th></tr>
+                            <tr><th>02</th></tr>
+                            <tr><th>03</th></tr>
+                            <tr><th>04</th></tr>
+                            <tr><th>20</th></tr>
+                            <tr><th>05</th></tr>
+                            <tr><th>06</th></tr>
+                            <tr><th>07</th></tr>
+                            <tr><th>08</th></tr>
+                            <tr><th>09</th></tr>
+                            <tr><th>40</th></tr>
+                            <tr><th>50</th></tr>
+                            <tr><th>60</th></tr>
+                            <tr><th>70</th></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-11">
+                        <table class="table table-bordered table-striped temp">
+                            <thead>
+                                <tr>
+                                    <th scope="col">一</th>
+                                    <th scope="col">二</th>
+                                    <th scope="col">三</th>
+                                    <th scope="col">四</th>
+                                    <th scope="col">五</th>
+                                    <th scope="col">六</th>
+                                    <th scope="col">日</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for k in courses_data%}
+                                <tr>
+                                    {% for i in k %}
+                                        {%if edit%}
+                                        <td class="nav-link-col" id="{{i}}" data-toggle="modal" data-target="#choose-courses-modal" >
+                                            {{i}}
+                                        </td>
 
-    
-                                    {%else%}
-                                    <td class="nav-link-col" >
-                                         <input type="button" onclick="location.href='/courses_info'" class="form-control" name={{i}} value={{i}} style="background-color:Transparent;border-color:Transparent" placeholder="Select"></input>
-                                    </td>
-                                    {%endif%}
-                                {%endfor%}
-                            </tr>
-                        {%endfor%}
-                           
-                        </tbody>
-                    </table>
+        
+                                        {%else%}
+                                        <td class="nav-link-col" >
+                                            <input type="button" onclick="location.href='/courses_info'" class="form-control" name={{i}} value={{i}} style="background-color:Transparent;border-color:Transparent" placeholder="Select"></input>
+                                        </td>
+                                        {%endif%}
+                                    {%endfor%}
+                                </tr>
+                            {%endfor%}
+                            
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                    <!-- table -->
                 </div>
             </div>
         </div>
