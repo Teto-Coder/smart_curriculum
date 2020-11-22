@@ -1,4 +1,5 @@
 {% load static %}
+{% load django_template_maths %}
 <!DOCTYPE html>
 <html lang="zh-CN">
 
@@ -47,7 +48,7 @@
     <script src={% static "js/bootstrap.min.js"%}></script>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <!-- Brand -->
-        <a class="navbar-brand" href="#">MCUOSC</a>
+        <a class="navbar-brand" href="/index">MCUOSC</a>
 
         <!-- Links -->
         <ul class="navbar-nav">
@@ -58,18 +59,19 @@
             <!-- Dropdown -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-          Dropdown link
+          Quick link
         </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="https://www.mcu.edu.tw/student/new-query/default.asp">Student System</a>
-                    <a class="dropdown-item" href="#">Link 2</a>
-                    <a class="dropdown-item" href="#">Link 3</a>
+                    <a class="dropdown-item" href="https://moodle.mcu.edu.tw/">Moodle</a>
+                    <a class="dropdown-item" href="https://www2.mcu.edu.tw/info/indexNew.asp">Teacher System</a>
                 </div>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link btn" data-toggle="modal" data-target="#exampleModal">Login</a>
+                {%if not islogin%}
+                <a class="nav-link btn" data-toggle="modal" data-target="#exampleModal">Login</a> {% endif %}
                 <!--modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -183,14 +185,29 @@
 
     <div class="jumbotron bg">
         <div class="container">
-            <h1>Ready. Set. Code.</h1>
-            <p>Are you ready to boilerstrap your cross-compatible buzzword? We're Sassy, flat and semantic, so what are you waiting for?</p>
+            <h1>智慧課表系統</h1>
+            <p>Are you ready to using our smart Curriculum? So what are you waiting for!</p>
 
             <br>
-            <p>
-                <a class="btn btn-primary btn-lg" href="#" role="button">Download Free Trial »</a>
-                <a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a>
-            </p>
+            <div class="row">
+                <div class="col-8">
+                    {% comment %} <a class="btn btn-primary btn-lg" href="#" role="button">Download Free Trial »</a> {% endcomment %}
+                    {% comment %} <a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a> {% endcomment %}
+                </div>
+                {%if islogin%} {%if edit%}
+                <div class="col-4">
+                    <form action="/Finish/" method="get">
+                        <button type="submit" class="btn btn-primary btn-lg float-right" href="#" role="button">Finish</button>
+                    </form>
+                </div>
+                {%else%}
+                <div class="col-4">
+                    <form action="/Edit/" method="get" id="edit">
+                        <button type="submit" class="btn btn-primary btn-lg float-right" href="#" role="button">Edit</button>
+                    </form>
+                </div>
+                {%endif %} {%endif%}
+            </div>
             {% if islogin %}
             <hr/>
             <div class="container">
@@ -199,7 +216,6 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th scope="col"></th>
                                 <th scope="col">一</th>
                                 <th scope="col">二</th>
                                 <th scope="col">三</th>
@@ -210,157 +226,31 @@
                             </tr>
                         </thead>
                         <tbody>
+                        {% for k in courses_data%}
                             <tr>
-                                <th scope="row">01</th>
-                                <td class="nav-link btn" data-toggle="modal" data-target="#choose-courses-modal">#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
+                                {% for i in k %}
+                                    {%if edit%}
+                                    <td class="nav-link-col" id="{{i}}" data-toggle="modal" data-target="#choose-courses-modal" >
+                                        {{i}}
+                                    </td>
+
+    
+                                    {%else%}
+                                    <td class="nav-link-col" >
+                                         <input type="button" onclick="location.href='/courses_info'" class="form-control" name={{i}} value={{i}} style="background-color:Transparent;border-color:Transparent" placeholder="Select"></input>
+                                    </td>
+                                    {%endif%}
+                                {%endfor%}
                             </tr>
-                            <tr>
-                                <th scope="row">02</th>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">03</th>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">04</th>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">20</th>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">05</th>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">06</th>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">07</th>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">08</th>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">09</th>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">40</th>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">50</th>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">60</th>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">70</th>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                            </tr>
+                        {%endfor%}
+                           
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-    {% else %}
-    <p>您尚未登入喔~</p>
-    {% endif %}
-    </div>
-    </div>
+
 
     <div class="modal fade" id="choose-courses-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -368,36 +258,49 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Choose Course</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+                <span aria-hidden="true">&times;</span>
+              </button>
                 </div>
                 <nav class="navbar navbar-default" role="navigation">
                     <div class="container-fluid">
                         <ul class="nav navbar-nav">
                             <li class="dropdown">
-                                <input href="#" class="dropdown-toggle form-control" data-toggle="dropdown" placeholder="Search"></input>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">36101-36101 程式設計一</a></li>
-                                    <li><a href="#">36102-36101 程式設計一</a></li>
-                                    <li><a href="#">36201-36101 資料結構</a></li>
-                                    <li><a href="#">36255-36303 iOS程式設計</a></li>
-                                    <li><a href="#">36353-36222 資訊安全導論</a></li>
+                                <input href="#" name = "change_course" class="dropdown-toggle form-control" data-toggle="dropdown" placeholder="Select"></input>
+                                <ul>
+                                    <li><button class="btn" type="submit" id="1">36101-36101 程式設計一</button></li>
+                                    <li><button class="btn" type="submit" id="2">36102-36101 程式設計一</button></li>
+                                    <li><button class="btn" type="submit" id="3">36201-36101 資料結構</button></li>
+                                    <li><button class="btn" type="submit" id="4">36255-36303 iOS程式設計</button></li>
+                                    <script>
+                                        $( ".btn" ).click(function() {
+                            
+                                            $("input[name='change_course']").val($(this).text());
+                                        });
+                                    </script>   
                                 </ul>
                             </li>
                         </ul>
                     </div>
                 </nav>
                 <!-- <div class="modal-body">
-            <input class="form-control" placeholder="Username"></input>
-            <input type="password" class="form-control" id="login-password" placeholder="Password">
-          </div> -->
+              <input class="form-control" placeholder="Username"></input>
+              <input type="password" class="form-control" id="login-password" placeholder="Password">
+            </div> -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary">Confirm</button>
                 </div>
-            </div>
+                
         </div>
     </div>
+    <script>
+       $( "" ).on('shown', function(){
+            alert("I want this to appear after the modal has opened!");
+        });
+    </script>
+    {% else %}
+    <p>您尚未登入喔~</p>
+    {% endif %}
 
 </body>
 

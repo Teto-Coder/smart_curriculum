@@ -7,7 +7,7 @@ class UserData(models.Model):
     userSchool = models.CharField(max_length=50, default="", editable=False)
     userMajor = models.CharField(max_length=50, default="", editable=False)
     isTeacher = models.BooleanField(max_length=50, default=False, editable=False)
-    courses =  models.CharField(max_length=500, default="", editable=False)
+    courses =  models.CharField(max_length=1000, default="x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x", editable=False)
     last_modify_date = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     class Meta:
